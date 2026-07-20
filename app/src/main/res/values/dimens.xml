@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="unit">4dp</dimen>
+    <dimen name="container_padding">16dp</dimen>
+    <dimen name="stack_gap_sm">8dp</dimen>
+    <dimen name="stack_gap_md">16dp</dimen>
+    <dimen name="stack_gap_lg">24dp</dimen>
+    <dimen name="card_padding">20dp</dimen>
+
+    <!-- Corner Radii -->
+    <dimen name="radius_sm">4dp</dimen>
+    <dimen name="radius_default">8dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_xl">24dp</dimen>
+    <dimen name="radius_full">999dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
+
+    <!-- UI Components -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="input_height">56dp</dimen>
+</resources>
