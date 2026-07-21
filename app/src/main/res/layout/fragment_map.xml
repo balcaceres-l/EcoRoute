@@ -72,7 +72,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- Botón Zoom In (Con ID agregado) -->
                 <ImageButton
+                    android:id="@+id/btnZoomIn"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackground"
@@ -85,17 +87,21 @@
                     android:layout_height="1dp"
                     android:background="@color/outline_variant" />
 
-                <ImageButton
+                <!-- Botón Zoom Out (Cambiado a texto temporalmente) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnZoomOut"
+                    style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:src="@android:drawable/ic_input_delete"
-                    android:contentDescription="Zoom Out"
-                    app:tint="@color/on_surface_variant" />
+                    android:text="—"
+                    android:textSize="18sp"
+                    android:textColor="@color/on_surface_variant"
+                    android:contentDescription="Zoom Out" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnMyLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_person"
@@ -103,18 +109,21 @@
             app:fabSize="normal" />
     </LinearLayout>
 
-   <!-- Info Card -->
+    <!-- Info Card (Oculta con visibility="gone") -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomSheetCard"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/radius_lg"
+        app:cardCornerRadius="20dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:strokeColor="@color/outline_variant"
         app:strokeWidth="1dp">
+
+
 
 
         <LinearLayout

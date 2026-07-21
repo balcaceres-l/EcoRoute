@@ -11,38 +11,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 1. Cargar el mapa por defecto cuando la app inicia por primera vez
+        // Cargar el mapa por defecto
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, MapFragment())
-                .commit()
+            cargarFragmento(MapFragment())
         }
 
-        // 2. Configurar la navegación para tus otros botones inferiores
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         bottomNav.setOnItemSelectedListener { item ->
-            // Aquí enlazamos las opciones del menú con tus distintos archivos
-            var selectedFragment: Fragment = MapFragment()
-
-            // Nota: Asegúrate de que los R.id coincidan con los que tienes en tu archivo res/menu/bottom_nav_menu.xml
             when (item.itemId) {
-                // Si tienes un id llamado nav_mapa en tu menú
-                // R.id.nav_mapa -> selectedFragment = MapFragment()
-
-                // Cuando pasemos a la brújula peatonal
-                // R.id.nav_brujula -> selectedFragment = CompassFragment()
-
-                // Para tu bitácora de paradas
-                // R.id.nav_log -> selectedFragment = LogFragment()
+                // Reemplaza estos R.id con los que tengas en tu bottom_nav_menu.xml
+                R.id.nav_map -> {
+                    cargarFragmento(MapFragment())
+                    true
+                }
+                R.id.nav_compass -> {
+                    cargarFragmento(CompassFragment())
+                    true
+                }
+                R.id.nav_log -> {
+                    cargarFragmento(LogFragment())
+                    true
+                }
+                else -> false
             }
-
-            // Cambiamos el fragmento visible en pantalla
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, selectedFragment)
-                .commit()
-
-            true
         }
+    }
+
+    // Función auxiliar para no repetir código al cambiar de vista
+    private fun cargarFragmento(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .commit()
     }
 }

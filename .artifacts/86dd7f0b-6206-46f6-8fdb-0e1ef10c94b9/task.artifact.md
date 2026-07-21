@@ -1,2 +1,2 @@
-- [x] Fix `activity_main.xml` attribute error (Removed redundant/invalid attribute)
-- [/] Verify build with `:app:assembleDebug`
+- [x] Fix `findViewById` type inference in `MapFragment.kt`
+- [x] Verify build with `:app:assembleDebug`

@@ -1,7 +1,14 @@
+import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
 }
-
+val properties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    properties.load(localPropertiesFile.inputStream())
+}
+// Extraer la clave (si no existe, usa un texto vacío)
+val mapsApiKey = properties.getProperty("MAPS_API_KEY") ?: ""
 android {
     namespace = "com.example.ecoroute"
     compileSdk {
@@ -18,6 +25,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {
