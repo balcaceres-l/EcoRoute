@@ -58,7 +58,6 @@
         android:layout_height="80dp"
         android:background="@color/surface"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:navigationBarIndicatorColor="@color/secondary_container" />
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

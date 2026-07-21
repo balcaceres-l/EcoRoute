@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MapFragment">
 
-    <!-- Map Placeholder -->
-    <View
-        android:id="@+id/mapPlaceholder"
+    <!-- Google Map Container -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/google_map_container"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/surface_variant" />
+        android:layout_height="match_parent" />
 
     <!-- Filter Chips -->
     <com.google.android.material.chip.ChipGroup
@@ -103,7 +103,7 @@
             app:fabSize="normal" />
     </LinearLayout>
 
-    <!-- Info Card -->
+   <!-- Info Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomSheetCard"
         android:layout_width="match_parent"
@@ -115,6 +115,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:strokeColor="@color/outline_variant"
         app:strokeWidth="1dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,0 +1,2 @@
+- [x] Fix `activity_main.xml` attribute error (Removed redundant/invalid attribute)
+- [/] Verify build with `:app:assembleDebug`

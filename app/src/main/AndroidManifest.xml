@@ -18,7 +18,7 @@
         android:theme="@style/Theme.EcoRoute">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="TU_CLAVE_DE_API_AQUI" />
+            android:value="AIzaSyDSfhXjls050_WoZYvMVqVRovy7pYaMcXI" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
