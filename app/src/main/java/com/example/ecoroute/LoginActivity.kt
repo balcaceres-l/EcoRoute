@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.ecoroute.data.local.session.SessionManager
 import com.example.ecoroute.data.remote.request.LoginRequest
 import com.example.ecoroute.data.remote.response.ErrorResponse
 import com.example.ecoroute.repository.AuthRepository
@@ -18,10 +19,12 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
 
     private val authRepository = AuthRepository()
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        sessionManager = SessionManager(applicationContext)
 
         val emailEditText = findViewById<EditText>(R.id.emailEditText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
@@ -52,9 +55,15 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val authData = response.body()
                     if (authData?.accessToken != null) {
+                        sessionManager.saveSession(
+                            accessToken = authData.accessToken,
+                            refreshToken = authData.refreshToken,
+                            userId = authData.user?.id,
+                            email = authData.user?.email
+                        )
                         Log.d("EcoRouteAuth", "Login exitoso para: $email")
                         Toast.makeText(this@LoginActivity, "¡Bienvenido de nuevo!", Toast.LENGTH_SHORT).show()
-                        
+
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     } else if (authData?.user != null) {
