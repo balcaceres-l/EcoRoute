@@ -31,7 +31,7 @@ interface ApiService {
     @GET("rest/v1/profiles")
     suspend fun getProfile(
         @Header("Authorization") bearerToken: String,
-        @Query("id") id: String, 
+        @Query("id") id: String,
         @Query("select") select: String = "*"
     ): Response<List<ProfileResponse>>
 }
