@@ -21,7 +21,6 @@ interface ApiService {
     @POST("auth/v1/token?grant_type=password")
     suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
 
-    // Para guardar el perfil extendido (nombre, rol) en la tabla "profiles"
     @POST("rest/v1/profiles")
     @Headers("Prefer: return=representation")
     suspend fun createProfile(
@@ -32,7 +31,7 @@ interface ApiService {
     @GET("rest/v1/profiles")
     suspend fun getProfile(
         @Header("Authorization") bearerToken: String,
-        @Query("id") id: String, // formato: "eq.<uuid>"
+        @Query("id") id: String, 
         @Query("select") select: String = "*"
     ): Response<List<ProfileResponse>>
 }
