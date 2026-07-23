@@ -13,14 +13,17 @@ object RetrofitClient {
         Log.d("EcoRouteNetwork", "Conexión con el servidor configurada exitosamente: ${BuildConfig.SUPABASE_URL}")
     }
 
-
     private val supabaseHeadersInterceptor = Interceptor { chain ->
-        val request = chain.request().newBuilder()
-            .addHeader("apikey", BuildConfig.SUPABASE_ANON_KEY)
-            .addHeader("Authorization", "Bearer ${BuildConfig.SUPABASE_ANON_KEY}")
-            .addHeader("Content-Type", "application/json")
-            .build()
-        chain.proceed(request)
+        val originalRequest = chain.request()
+        val requestBuilder = originalRequest.newBuilder()
+            .header("apikey", BuildConfig.SUPABASE_ANON_KEY)
+            .header("Content-Type", "application/json")
+
+        if (originalRequest.header("Authorization").isNullOrBlank()) {
+            requestBuilder.header("Authorization", "Bearer ${BuildConfig.SUPABASE_ANON_KEY}")
+        }
+
+        chain.proceed(requestBuilder.build())
     }
 
     private val okHttpClient = OkHttpClient.Builder()

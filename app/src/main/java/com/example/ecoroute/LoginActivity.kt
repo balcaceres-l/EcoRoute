@@ -35,9 +35,9 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             val email = emailEditText.text.toString().trim()
-            val password = passwordEditText.text.toString().trim()
+            val password = passwordEditText.text.toString()
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (email.isBlank() || password.isBlank()) {
                 Toast.makeText(this, "Por favor, ingresa correo y contraseña", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

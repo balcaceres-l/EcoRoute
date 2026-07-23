@@ -49,11 +49,11 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister.setOnClickListener {
             val fullName = etFullName.text.toString().trim()
             val email = etEmail.text.toString().trim()
-            val password = etPassword.text.toString().trim()
-            val confirmPassword = etConfirmPassword.text.toString().trim()
+            val password = etPassword.text.toString()
+            val confirmPassword = etConfirmPassword.text.toString()
             val selectedRole = actvRole.text.toString()
 
-            if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (fullName.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
                 Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
