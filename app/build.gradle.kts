@@ -9,6 +9,7 @@ if (localPropertiesFile.exists()) {
 }
 // Extraer la clave (si no existe, usa un texto vacío)
 val mapsApiKey = properties.getProperty("MAPS_API_KEY") ?: ""
+val serverUrl = properties.getProperty("SERVER_URL") ?: ""
 android {
     namespace = "com.example.ecoroute"
     compileSdk {
@@ -27,6 +28,14 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
+        buildConfigField(
+            "String",
+            "SERVER_URL",
+            "\"$serverUrl\""
+        )
+        buildFeatures {
+            buildConfig = true
+        }
     }
 
     buildTypes {
