@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.ecoroute.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,9 +13,6 @@ object RetrofitClient {
         Log.d("EcoRouteNetwork", "Conexión con el servidor configurada exitosamente: ${BuildConfig.SUPABASE_URL}")
     }
 
-    private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
 
     private val supabaseHeadersInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
@@ -29,7 +25,6 @@ object RetrofitClient {
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(supabaseHeadersInterceptor)
-        .addInterceptor(loggingInterceptor)
         .build()
 
     val instance: ApiService by lazy {

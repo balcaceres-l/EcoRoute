@@ -14,6 +14,7 @@ import com.example.ecoroute.data.remote.response.ErrorResponse
 import com.example.ecoroute.repository.AuthRepository
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -25,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         sessionManager = SessionManager(applicationContext)
+        navigateIfAlreadyAuthenticated()
 
         val emailEditText = findViewById<EditText>(R.id.emailEditText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
@@ -48,6 +50,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun navigateIfAlreadyAuthenticated() {
+        lifecycleScope.launch {
+            if (sessionManager.session.first().isLoggedIn) {
+                navigateToMain()
+            }
+        }
+    }
+
+    private fun navigateToMain() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
     private fun performLogin(email: String, password: String) {
         lifecycleScope.launch {
             try {
@@ -64,8 +79,7 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("EcoRouteAuth", "Login exitoso para: $email")
                         Toast.makeText(this@LoginActivity, "¡Bienvenido de nuevo!", Toast.LENGTH_SHORT).show()
 
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                        finish()
+                        navigateToMain()
                     } else if (authData?.user != null) {
                         // El usuario existe pero quizás falta confirmación de email
                         Toast.makeText(this@LoginActivity, "Por favor, verifica tu correo electrónico", Toast.LENGTH_LONG).show()
