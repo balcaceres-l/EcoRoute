@@ -1,7 +1,6 @@
 package com.example.ecoroute.data.remote.request
 
-data class RegisterRequest(
+data class LoginRequest(
     val email: String,
     val password: String
 )
-

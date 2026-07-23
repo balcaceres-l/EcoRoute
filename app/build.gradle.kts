@@ -1,6 +1,7 @@
 import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.ksp)
 }
 val properties = Properties()
 val localPropertiesFile = rootProject.file("local.properties")
@@ -10,6 +11,8 @@ if (localPropertiesFile.exists()) {
 // Extraer la clave (si no existe, usa un texto vacío)
 val mapsApiKey = properties.getProperty("MAPS_API_KEY") ?: ""
 val serverUrl = properties.getProperty("SERVER_URL") ?: ""
+val supabaseUrl = properties.getProperty("SUPABASE_URL") ?: ""
+val supabaseAnonKey = properties.getProperty("SUPABASE_ANON_KEY") ?: ""
 android {
     namespace = "com.example.ecoroute"
     compileSdk {
@@ -17,7 +20,9 @@ android {
             minorApiLevel = 1
         }
     }
-
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         applicationId = "com.example.ecoroute"
         minSdk = 26
@@ -33,9 +38,8 @@ android {
             "SERVER_URL",
             "\"$serverUrl\""
         )
-        buildFeatures {
-            buildConfig = true
-        }
+        buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
+        buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
     }
 
     buildTypes {
@@ -62,6 +66,14 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.coroutines)
     implementation(libs.gson)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.datastore.preferences)
+    implementation(libs.work.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
